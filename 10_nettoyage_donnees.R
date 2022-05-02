@@ -4,6 +4,7 @@
 
 rm(list = ls())
 library(dplyr)
+library(lubridate)
 
 RGPH_MLI <- read.csv( file = "data/valeurs_mensuelles.csv", header = TRUE, sep = ";")
 #, stringsAsFactors = TRUE 
@@ -18,3 +19,9 @@ data <- data[-1,]
 data$indice_production <- as.numeric(data$indice_production)
 data$date <- paste(data$date,"01",sep="-")
 data$date <- as.Date(data$date)
+
+#data <- mutate(data, year = year(date))
+#data <- mutate(data, month = month(date))
+
+save(data, file = file.path("data", "donnee_propre.RData"))
+rm(data, RGPH_MLI)
